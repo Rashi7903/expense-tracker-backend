@@ -4,17 +4,17 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml
-COPY mvnw .mvn pom.xml ./
+# Copy Maven wrapper and pom.xml from the backend folder
+COPY backend/mvnw backend/.mvn backend/pom.xml ./
 
 # Make mvnw executable
 RUN chmod +x mvnw
 
 # Copy the rest of the backend source code
-COPY backend ./backend
+COPY backend/src ./src
 
 # Build the application
-RUN ./mvnw -f backend/pom.xml clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
 # Run the application
-CMD ["java", "-jar", "backend/target/*.jar"]
+CMD ["java", "-jar", "target/*.jar"]
