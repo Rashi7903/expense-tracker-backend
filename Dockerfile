@@ -4,12 +4,13 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper, configuration, and pom.xml
-COPY backend/mvnw backend/.mvn backend/pom.xml ./
-RUN chmod +x mvnw
+# Copy Maven wrapper, pom.xml, and .mvn directory
+COPY backend/mvnw .
+COPY backend/.mvn .mvn
+COPY backend/pom.xml .
 
-# Copy Maven wrapper's internal files (important!)
-COPY backend/.mvn ./backend/.mvn
+# Make mvnw executable
+RUN chmod +x mvnw
 
 # Copy source code
 COPY backend/src ./src
