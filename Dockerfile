@@ -16,8 +16,5 @@ COPY backend ./backend
 # Build the application
 RUN ./mvnw -f backend/pom.xml clean package -DskipTests
 
-# Expose port 8080
-EXPOSE 8080
-
 # Run the application
-CMD ["java", "-jar", "backend/target/backend-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "backend/target/*.jar"]
